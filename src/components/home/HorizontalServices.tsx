@@ -26,6 +26,8 @@ export function HorizontalServices({ services }: { services: ServiceDoc[] }) {
   const section = useRef<HTMLElement>(null);
   const content = useRef<HTMLDivElement>(null);
   const track = useRef<HTMLDivElement>(null);
+  const row = useRef<HTMLDivElement>(null);
+  const [rowProgress, setRowProgress] = useState(0.04);
   const [mode, setMode] = useState<Mode>("row");
   const [distance, setDistance] = useState(0);
   const [index, setIndex] = useState(1);
@@ -76,9 +78,27 @@ export function HorizontalServices({ services }: { services: ServiceDoc[] }) {
   const x = useTransform(scrollYProgress, [0, 1], [0, -distance]);
   const progress = useTransform(scrollYProgress, [0, 1], [0.04, 1]);
 
+  const toIndex = (v: number) => Math.min(services.length, Math.max(1, Math.round(v * (services.length - 1)) + 1));
+
+  // Pinned: the vertical scroll drives the counter.
   useMotionValueEvent(scrollYProgress, "change", (v) => {
-    setIndex(Math.min(services.length, Math.max(1, Math.round(v * (services.length - 1)) + 1)));
+    if (pinned) setIndex(toIndex(v));
   });
+
+  // Swipe row: the horizontal scroll of the row drives the counter.
+  const onRowScroll = () => {
+    const el = row.current;
+    if (!el || pinned) return;
+    const v = el.scrollLeft / Math.max(1, el.scrollWidth - el.clientWidth);
+    setRowProgress(Math.max(0.04, v));
+    setIndex(toIndex(v));
+  };
+  useEffect(() => {
+    if (pinned) return;
+    setIndex(1);
+    setRowProgress(0.04);
+    if (row.current) row.current.scrollLeft = 0;
+  }, [pinned]);
 
   const total = String(services.length).padStart(2, "0");
   const cardW = compact ? "w-[78vw] sm:w-[340px] lg:w-[360px]" : "w-[82vw] sm:w-[380px] lg:w-[400px]";
@@ -113,7 +133,7 @@ export function HorizontalServices({ services }: { services: ServiceDoc[] }) {
                   <span className="text-2xl text-ink">{String(index).padStart(2, "0")}</span> / {total}
                 </span>
                 <div className="h-1.5 w-40 overflow-hidden rounded-full bg-ink/10 sm:w-56" aria-hidden>
-                  <motion.div className="h-full origin-left rounded-full bg-primary" style={{ scaleX: pinned ? progress : 1 }} />
+                  <motion.div className="h-full origin-left rounded-full bg-primary" style={{ scaleX: pinned ? progress : rowProgress }} />
                 </div>
               </div>
             </div>
@@ -124,7 +144,12 @@ export function HorizontalServices({ services }: { services: ServiceDoc[] }) {
             )}
           </div>
 
-          <div className={cn(compact ? "mt-6" : "mt-8 sm:mt-10", !pinned && "no-scrollbar snap-x snap-mandatory overflow-x-auto pb-2")}>
+          <div
+            ref={row}
+            onScroll={onRowScroll}
+            data-lenis-prevent-horizontal
+            className={cn(compact ? "mt-6" : "mt-8 sm:mt-10", !pinned && "no-scrollbar snap-x snap-mandatory overflow-x-auto pb-2")}
+          >
             <motion.div
               ref={track}
               style={pinned ? { x } : undefined}
