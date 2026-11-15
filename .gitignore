@@ -8,3 +8,7 @@ out
 next-env.d.ts
 npm-debug.log*
 .DS_Store
+
+.vercel
+.env*
+!.env.example
