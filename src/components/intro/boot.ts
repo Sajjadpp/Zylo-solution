@@ -1,0 +1,2 @@
+/** Inlined in <head>. Sets html[data-intro="play"] on every full page load of the public site (unless reduced motion is requested). */
+export const introBootScript = `(function(){try{var d=document.documentElement;if(location.pathname.indexOf('/admin')===0)return;if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;d.setAttribute('data-intro','play');window.__introStart=performance.now();}catch(e){}})();`;

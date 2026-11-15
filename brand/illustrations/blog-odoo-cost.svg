@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+<defs>
+  <pattern id="dots" width="28" height="28" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="2" fill="#2541F5" fill-opacity="0.10"/></pattern>
+  <filter id="shadow" x="-20%" y="-20%" width="140%" height="160%"><feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#0B0B0F" flood-opacity="0.14"/></filter>
+  <filter id="soft" x="-20%" y="-20%" width="140%" height="160%"><feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#0B0B0F" flood-opacity="0.12"/></filter>
+</defs>
+<rect width="1600" height="900" fill="#F5F7FB"/>
+<rect width="1600" height="900" fill="url(#dots)"/>
+<circle cx="1500" cy="100" r="220" fill="#FFC914"/>
+<circle cx="90" cy="820" r="150" fill="none" stroke="#2541F5" stroke-opacity="0.12" stroke-width="40"/>
+
+<rect x="240" y="160" width="640" height="560" rx="22" fill="#FFFFFF" filter="url(#shadow)"/>
+<clipPath id="wc3"><rect x="240" y="160" width="640" height="560" rx="22"/></clipPath>
+<g clip-path="url(#wc3)">
+<rect x="240" y="160" width="640" height="50" rx="0" fill="#E9EDF5"/>
+<circle cx="266" cy="185" r="7" fill="#FF6B6B" /><circle cx="288" cy="185" r="7" fill="#FFC914" /><circle cx="310" cy="185" r="7" fill="#22C55E" />
+<rect x="340" y="173" width="320" height="24" rx="12" fill="#FFFFFF"/><text x="356" y="190" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="400" fill="#5A6275" fill-opacity="1">Estimate</text>
+
+<text x="280" y="270" font-family="Arial, Helvetica, sans-serif" font-size="26" font-weight="800" fill="#0B0B0F">Odoo project budget</text>
+<text x="280" y="302" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#5A6275">Typical first-year split</text>
+<circle cx="430" cy="500" r="120" fill="none" stroke="#E9EDF5" stroke-width="48"/><circle cx="430" cy="500" r="120" fill="none" stroke="#2541F5" stroke-width="48" stroke-dasharray="339.29200658769764 414.69023027385265" stroke-dashoffset="0" transform="rotate(-90 430 500)"/><circle cx="430" cy="500" r="120" fill="none" stroke="#FFC914" stroke-width="48" stroke-dasharray="188.49555921538757 565.4866776461627" stroke-dashoffset="-339.29200658769764" transform="rotate(-90 430 500)"/><circle cx="430" cy="500" r="120" fill="none" stroke="#0B0B0F" stroke-width="48" stroke-dasharray="113.09733552923254 640.8849013323178" stroke-dashoffset="-527.7875658030853" transform="rotate(-90 430 500)"/><circle cx="430" cy="500" r="120" fill="none" stroke="#DCE3FF" stroke-width="48" stroke-dasharray="113.09733552923254 640.8849013323178" stroke-dashoffset="-640.8849013323178" transform="rotate(-90 430 500)"/>
+<text x="430" y="494" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="800" fill="#0B0B0F" text-anchor="middle">100%</text><text x="430" y="520" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="400" fill="#5A6275" text-anchor="middle">budget</text>
+<rect x="600" y="410" width="22" height="22" rx="6" fill="#2541F5"/><text x="636" y="428" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700" fill="#0B0B0F">Implementation</text><text x="840" y="428" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#5A6275" text-anchor="end">45%</text><rect x="600" y="462" width="22" height="22" rx="6" fill="#FFC914"/><text x="636" y="480" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700" fill="#0B0B0F">Licenses</text><text x="840" y="480" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#5A6275" text-anchor="end">25%</text><rect x="600" y="514" width="22" height="22" rx="6" fill="#0B0B0F"/><text x="636" y="532" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700" fill="#0B0B0F">Training</text><text x="840" y="532" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#5A6275" text-anchor="end">15%</text><rect x="600" y="566" width="22" height="22" rx="6" fill="#DCE3FF"/><text x="636" y="584" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700" fill="#0B0B0F">Support</text><text x="840" y="584" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#5A6275" text-anchor="end">15%</text>
+</g>
+<rect x="960" y="230" width="300" height="380" rx="30" fill="#0B0B0F" filter="url(#shadow)"/>
+<rect x="990" y="262" width="240" height="90" rx="14" fill="#1B1B25"/><text x="1210" y="322" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="800" fill="#FFC914" text-anchor="end">BHD</text>
+<rect x="990" y="376" width="72" height="44" rx="10" fill="#2A2A36"/><rect x="1074" y="376" width="72" height="44" rx="10" fill="#2A2A36"/><rect x="1158" y="376" width="72" height="44" rx="10" fill="#2A2A36"/><rect x="990" y="432" width="72" height="44" rx="10" fill="#2A2A36"/><rect x="1074" y="432" width="72" height="44" rx="10" fill="#2A2A36"/><rect x="1158" y="432" width="72" height="44" rx="10" fill="#2A2A36"/><rect x="990" y="488" width="72" height="44" rx="10" fill="#2A2A36"/><rect x="1074" y="488" width="72" height="44" rx="10" fill="#2A2A36"/><rect x="1158" y="488" width="72" height="44" rx="10" fill="#2A2A36"/><rect x="990" y="544" width="72" height="44" rx="10" fill="#2A2A36"/><rect x="1074" y="544" width="72" height="44" rx="10" fill="#2A2A36"/><rect x="1158" y="544" width="72" height="44" rx="10" fill="#FFC914"/>
+<rect x="1100" y="660" width="250" height="80" rx="22" fill="#FFFFFF" filter="url(#soft)"/>
+<circle cx="1142" cy="700" r="22" fill="#EEF1FF" />
+<g transform="translate(1130 688) scale(1)" fill="none" stroke="#2541F5" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 1 0 0 18a9 9 0 1 0 0-18zM12 7v5l3 3"/></g>
+<text x="1176" y="696" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700" fill="#0B0B0F">6–12 weeks</text>
+<text x="1176" y="720" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="400" fill="#5A6275" fill-opacity="1">Typical go-live</text>
+</svg>

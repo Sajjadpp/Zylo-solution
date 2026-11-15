@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+<defs>
+  <pattern id="dots" width="28" height="28" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="2" fill="#2541F5" fill-opacity="0.10"/></pattern>
+  <filter id="shadow" x="-20%" y="-20%" width="140%" height="160%"><feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#0B0B0F" flood-opacity="0.14"/></filter>
+  <filter id="soft" x="-20%" y="-20%" width="140%" height="160%"><feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#0B0B0F" flood-opacity="0.12"/></filter>
+</defs>
+<rect width="1600" height="900" fill="#F5F7FB"/>
+<rect width="1600" height="900" fill="url(#dots)"/>
+<circle cx="1560" cy="120" r="210" fill="#FFC914"/>
+<circle cx="70" cy="80" r="120" fill="none" stroke="#2541F5" stroke-opacity="0.12" stroke-width="40"/>
+
+
+<rect x="200" y="140" width="900" height="560" rx="26" fill="#0B0B0F" filter="url(#shadow)"/>
+<clipPath id="mon"><rect x="218" y="158" width="864" height="524" rx="12"/></clipPath>
+<rect x="218" y="158" width="864" height="524" rx="12" fill="#FFFFFF"/>
+<g clip-path="url(#mon)"><rect x="218" y="158" width="864" height="64" rx="0" fill="#FFFFFF"/>
+<text x="252" y="200" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="800" fill="#0B0B0F">Gulf Co.</text>
+<rect x="702" y="188" width="60" height="8" rx="4" fill="#D7DCEA"/><rect x="782" y="188" width="60" height="8" rx="4" fill="#D7DCEA"/><rect x="862" y="188" width="60" height="8" rx="4" fill="#D7DCEA"/><rect x="942" y="176" width="110" height="32" rx="16" fill="#2541F5"/>
+<rect x="218" y="222" width="864" height="300" rx="0" fill="#EEF1FF"/>
+<rect x="252" y="268" width="380" height="30" rx="8" fill="#0B0B0F"/>
+<rect x="252" y="310" width="300" height="30" rx="8" fill="#0B0B0F"/>
+<rect x="252" y="368" width="340" height="10" rx="5" fill="#D7DCEA"/><rect x="252" y="388" width="280" height="10" rx="5" fill="#D7DCEA"/>
+<rect x="252" y="428" width="160" height="46" rx="23" fill="#FFC914"/>
+<rect x="752" y="258" width="280" height="220" rx="18" fill="#2541F5"/><circle cx="962" cy="328" r="46" fill="#FFC914" /><rect x="782" y="408" width="160" height="14" rx="7" fill="#FFFFFF" fill-opacity="0.6"/>
+<rect x="252" y="558" width="220" height="130" rx="14" fill="#F5F7FB"/><rect x="502" y="558" width="220" height="130" rx="14" fill="#F5F7FB"/><rect x="752" y="558" width="220" height="130" rx="14" fill="#F5F7FB"/></g>
+<path d="M600 700 h100 l20 70 h-140 z" fill="#D7DCEA"/><rect x="520" y="766" width="260" height="18" rx="9" fill="#D7DCEA"/>
+<g filter="url(#shadow)"><rect x="1140" y="250" width="260" height="520" rx="36" fill="#0B0B0F"/></g>
+<clipPath id="ph1"><rect x="1154" y="264" width="232" height="492" rx="24"/></clipPath>
+<rect x="1154" y="264" width="232" height="492" rx="24" fill="#FFFFFF"/>
+<g clip-path="url(#ph1)"><rect x="1154" y="264" width="232" height="70" rx="0" fill="#FFFFFF"/>
+<text x="1172" y="314" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="800" fill="#0B0B0F">Gulf Co.</text>
+<rect x="1332" y="294" width="32" height="6" rx="3" fill="#0B0B0F"/><rect x="1332" y="306" width="32" height="6" rx="3" fill="#0B0B0F"/>
+<rect x="1154" y="334" width="232" height="300" rx="0" fill="#EEF1FF"/>
+<rect x="1172" y="368" width="180" height="20" rx="8" fill="#0B0B0F"/>
+<rect x="1172" y="400" width="130" height="20" rx="8" fill="#0B0B0F"/>
+<rect x="1172" y="444" width="180" height="10" rx="5" fill="#D7DCEA"/><rect x="1172" y="464" width="140" height="10" rx="5" fill="#D7DCEA"/>
+<rect x="1172" y="500" width="140" height="40" rx="23" fill="#FFC914"/>
+
+<rect x="1172" y="664" width="196" height="110" rx="14" fill="#F5F7FB"/><rect x="1172" y="664" width="196" height="110" rx="14" fill="#F5F7FB"/><rect x="1172" y="664" width="196" height="110" rx="14" fill="#F5F7FB"/><rect x="1236.2" y="274" width="67.60000000000001" height="16" rx="8" fill="#0B0B0F"/></g>
+<rect x="1120" y="120" width="270" height="80" rx="22" fill="#FFFFFF" filter="url(#soft)"/>
+<circle cx="1162" cy="160" r="22" fill="#EEF1FF" />
+<g transform="translate(1150 148) scale(1)" fill="none" stroke="#2541F5" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4a7 7 0 1 0 0 14a7 7 0 1 0 0-14zM21 21l-5-5"/></g>
+<text x="1196" y="156" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700" fill="#0B0B0F">Found on Google</text>
+<text x="1196" y="180" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="400" fill="#5A6275" fill-opacity="1">SEO-ready pages</text>
+<rect x="1250" y="790" width="270" height="80" rx="22" fill="#0B0B0F" filter="url(#soft)"/>
+<circle cx="1292" cy="830" r="22" fill="#FFC914" />
+<g transform="translate(1280 818) scale(1)" fill="none" stroke="#0B0B0F" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></g>
+<text x="1326" y="826" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700" fill="#FFFFFF">Loads in 1.2s</text>
+<text x="1326" y="850" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="400" fill="#FFFFFF" fill-opacity="0.7">Fast on every phone</text>
+<rect x="120" y="760" width="260" height="80" rx="22" fill="#FFFFFF" filter="url(#soft)"/>
+<circle cx="162" cy="800" r="22" fill="#DCFCE7" />
+<g transform="translate(150 788) scale(1)" fill="none" stroke="#16A34A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 16V11a6 6 0 0 1 12 0v5l2 2H4zM10 21h4"/></g>
+<text x="196" y="796" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700" fill="#0B0B0F">New enquiry</text>
+<text x="196" y="820" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="400" fill="#5A6275" fill-opacity="1">via WhatsApp button</text>
+</svg>

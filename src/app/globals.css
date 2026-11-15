@@ -1,0 +1,249 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  /* neutrals as RGB channels – flipped inside .theme-dark */
+  --c-bg: 255 255 255;
+  --c-surface: 245 247 251;
+  --c-card: 255 255 255;
+  --c-ink: 11 11 15;
+  --c-muted: 86 94 112;
+  --c-hl: 37 65 245;
+}
+
+/* Black brand blocks (footer, showcase panels). Everything inside inherits the dark neutrals. */
+.theme-dark {
+  color-scheme: dark;
+  --c-bg: 11 11 15;
+  --c-surface: 21 21 29;
+  --c-card: 27 27 37;
+  --c-ink: 255 255 255;
+  --c-muted: 168 172 188;
+  --c-hl: 255 201 20;
+  color: rgb(var(--c-ink));
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-padding-top: 7rem;
+  }
+  body {
+    @apply bg-bg font-sans text-ink antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  h1, h2, h3, h4 {
+    @apply font-display tracking-tight text-ink;
+  }
+  ::selection {
+    background: #ffc914;
+    color: #0b0b0f;
+  }
+  :focus-visible {
+    outline: 2px solid #2541f5;
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+  .theme-dark :focus-visible {
+    outline-color: #ffc914;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex min-h-[44px] items-center justify-center gap-2 rounded-full px-5 text-sm font-semibold transition duration-200 disabled:cursor-not-allowed disabled:opacity-60;
+  }
+  .btn-primary {
+    @apply btn bg-primary text-white shadow-[0_12px_28px_-12px_rgba(37,65,245,0.75)] hover:-translate-y-0.5 hover:bg-primary-600;
+  }
+  .btn-yellow {
+    @apply btn bg-accent text-black shadow-[0_12px_28px_-12px_rgba(229,174,0,0.8)] hover:-translate-y-0.5 hover:bg-accent-600;
+  }
+  .btn-ghost {
+    @apply btn border border-ink/15 bg-card text-ink hover:-translate-y-0.5 hover:border-ink/30;
+  }
+  .btn-whatsapp {
+    @apply btn bg-whatsapp text-[#05290f] hover:-translate-y-0.5 hover:brightness-105;
+  }
+  .card {
+    @apply rounded-3xl border border-line bg-card shadow-card;
+  }
+  .eyebrow {
+    @apply inline-flex items-center gap-2 rounded-full border border-line bg-card px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-ink;
+  }
+  .eyebrow::before {
+    content: "";
+    @apply h-1.5 w-1.5 rounded-full bg-accent;
+  }
+  .section {
+    @apply py-20 sm:py-24 lg:py-28;
+  }
+  .input {
+    @apply w-full rounded-xl border border-ink/15 bg-card px-4 py-3 text-sm text-ink placeholder:text-muted/80 transition focus:border-primary focus:outline-none focus:ring-4 focus:ring-primary/15;
+  }
+  .label {
+    @apply mb-1.5 block text-sm font-medium text-ink/90;
+  }
+  .text-gradient {
+    @apply bg-gradient-to-r from-primary-600 to-primary-400 bg-clip-text text-transparent;
+  }
+  .grid-bg {
+    background-image: linear-gradient(rgb(var(--c-ink) / 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(var(--c-ink) / 0.05) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: radial-gradient(ellipse at 50% 30%, #000 30%, transparent 75%);
+  }
+}
+
+/* ─── Intro sequence (see components/intro/IntroOverlay.tsx) ─────────────
+   html[data-intro="play"] is set by an inline <head> script before first paint (motion allowed).
+   1. CSS alone reveals the letters + yellow dot + line instantly (no waiting for JS).
+   2. When JS is ready, it switches to data-intro="fly" and flies the logo into the header (GSAP Flip).
+   3. Failsafe: if JS is slow, CSS fades the overlay out at ~3.6s and shows the page.
+   Without JS nothing is hidden. */
+.intro-overlay {
+  display: none;
+}
+html[data-intro="play"] .intro-overlay,
+html[data-intro="fly"] .intro-overlay {
+  display: flex;
+}
+html[data-intro="play"] .intro-overlay {
+  animation: intro-failsafe 0.45s ease 3.6s forwards;
+}
+html[data-intro="play"] .intro-overlay [data-wm-letter] {
+  animation: intro-letter 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation-delay: calc(0.1s + var(--i, 0) * 0.06s);
+}
+html[data-intro="play"] .intro-overlay [data-wm-dot] {
+  animation: intro-dot 0.7s cubic-bezier(0.3, 1.6, 0.5, 1) 0.42s both;
+}
+html[data-intro="play"] .intro-overlay .intro-line {
+  animation: intro-line 1s ease-in-out 0.3s both;
+}
+html[data-intro="play"] [data-header-logo],
+html[data-intro="fly"] [data-header-logo] {
+  opacity: 0;
+}
+html[data-intro="play"] [data-intro-fade],
+html[data-intro="fly"] [data-intro-fade] {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+html[data-intro="play"] [data-hero-item],
+html[data-intro="fly"] [data-hero-item] {
+  opacity: 0;
+  transform: translateY(22px);
+}
+html[data-intro="play"] [data-intro-fade],
+html[data-intro="play"] [data-hero-item] {
+  animation: intro-show 0.6s ease 3.7s forwards;
+}
+html[data-intro="play"] [data-header-logo] {
+  animation: intro-show 0.4s ease 3.7s forwards;
+}
+/* The LCP headline stays painted (opacity 1) and only slides, so Core Web Vitals are unaffected. */
+html[data-intro="play"] [data-hero-item="lcp"],
+html[data-intro="fly"] [data-hero-item="lcp"] {
+  opacity: 1;
+}
+html[data-intro="done"] [data-intro-fade],
+html[data-intro="done"] [data-hero-item] {
+  transition: opacity 0.7s cubic-bezier(0.2, 0.7, 0.2, 1), transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition-delay: calc(var(--i, 0) * 90ms);
+}
+@keyframes intro-letter {
+  from {
+    opacity: 0;
+    transform: translateY(0.25em);
+    filter: blur(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: blur(0);
+  }
+}
+@keyframes intro-dot {
+  0% {
+    opacity: 0;
+    transform: translateY(-0.6em) scale(0.4);
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes intro-line {
+  0% {
+    transform: scaleX(0);
+    opacity: 1;
+  }
+  70% {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scaleX(1);
+    opacity: 0;
+  }
+}
+@keyframes intro-failsafe {
+  to {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+}
+@keyframes intro-show {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Markdown content */
+.prose-zylo {
+  @apply prose max-w-none prose-headings:font-display prose-headings:tracking-tight prose-h2:mt-12 prose-h2:text-2xl prose-h3:text-xl prose-p:leading-relaxed prose-p:text-ink/80 prose-headings:text-ink prose-code:text-ink prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-strong:text-ink prose-li:text-ink/80 prose-li:marker:text-primary prose-th:text-ink prose-td:text-ink/80 prose-table:text-sm prose-hr:border-line;
+}
+.prose-zylo table {
+  @apply block overflow-x-auto;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+/* ─── Lenis smooth scroll (from lenis/dist/lenis.css) ───────────── */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis:not(.lenis-autoToggle).lenis-stopped {
+  overflow: clip;
+}
+.lenis [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
