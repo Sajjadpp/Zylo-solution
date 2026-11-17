@@ -1,7 +1,8 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { OfferingDetail } from "@/components/detail/OfferingDetail";
-import { getProduct, getProducts, getServices, getSettings } from "@/lib/content";
+import { ProductDetail } from "@/components/products/ProductDetail";
+import { getProduct, getProducts, getProjects, getSettings } from "@/lib/content";
+import { findCaseStudy } from "@/lib/products";
 import { buildMetadata } from "@/lib/seo";
 
 export const revalidate = 60;
@@ -25,8 +26,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function ProductPage({ params }: Props) {
   const { slug } = await params;
-  const [product, services, settings] = await Promise.all([getProduct(slug), getServices(), getSettings()]);
+  const [product, products, projects, settings] = await Promise.all([getProduct(slug), getProducts(), getProjects(), getSettings()]);
   if (!product) notFound();
-  const related = services.filter((s) => s.slug !== slug && ["odoo-erp-implementation", "application-development", "software-development"].includes(s.slug));
-  return <OfferingDetail doc={product} kind="products" related={related} whatsapp={settings.whatsapp} />;
+  return (
+    <ProductDetail
+      product={product}
+      others={products.filter((p) => p.slug !== slug)}
+      caseStudy={findCaseStudy(product, projects)}
+      whatsapp={settings.whatsapp}
+    />
+  );
 }

@@ -1,5 +1,6 @@
-import { FeaturedProducts, FinalCta } from "@/components/home/Sections";
 import { PageHeader } from "@/components/layout/PageHeader";
+import { ProductGuide, ProductRow } from "@/components/products/ProductRow";
+import { MinimalCta } from "@/components/ui/MinimalCta";
 import { getProducts, getSettings } from "@/lib/content";
 import { buildMetadata } from "@/lib/seo";
 
@@ -18,14 +19,18 @@ export default async function ProductsPage() {
     <>
       <PageHeader
         crumbs={[{ name: "Products", href: "/products" }]}
-        eyebrow="Products"
-        title="Products built for Gulf operations"
-        description="Two proven Zylo products that plug straight into Odoo ERP: barcode inventory for warehouses and retail, and an offline-ready van sales app for field teams."
+        title="Products"
+        description="Ready-made tools that plug straight into Odoo ERP, built by Zylo in Bahrain."
       />
-      <div className="-mt-16">
-        <FeaturedProducts products={products} />
+      <div className="container">
+        <div className="grid gap-x-8 gap-y-12 border-t border-line pb-14 pt-12 sm:grid-cols-2 sm:pb-16 lg:grid-cols-3">
+          {products.map((p, i) => (
+            <ProductRow key={p.slug} product={p} index={i} />
+          ))}
+        </div>
+        <ProductGuide products={products} />
       </div>
-      <FinalCta whatsapp={settings.whatsapp} />
+      <MinimalCta title="Not sure which one fits?" text="Tell us how your team works. We’ll show you the right tool in a free demo." whatsapp={settings.whatsapp} />
     </>
   );
 }
