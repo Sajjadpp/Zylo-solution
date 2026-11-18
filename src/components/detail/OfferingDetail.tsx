@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowRight, Check, CheckCircle2, Users } from "lucide-react";
-import { PageHeader } from "@/components/layout/PageHeader";
+import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
+import { cn } from "@/lib/utils";
 import { CoverImage } from "@/components/ui/CoverImage";
 import { Markdown } from "@/components/ui/Markdown";
 import { FaqAccordion } from "@/components/ui/FaqAccordion";
@@ -14,6 +15,8 @@ import { WhatsAppIcon } from "@/components/ui/SocialIcons";
 import { faqLd, serviceLd } from "@/lib/seo";
 import { whatsappLink } from "@/lib/site";
 import type { ProductDoc, ServiceDoc } from "@/types";
+
+const hi = (n: number) => ({ "--i": n }) as React.CSSProperties;
 
 /** Shared layout for /services/[slug] and /products/[slug] – answer-first summary, audience, features, FAQ. */
 export function OfferingDetail({
@@ -34,45 +37,69 @@ export function OfferingDetail({
   return (
     <>
       <JsonLd data={[serviceLd(doc, path), faqLd(doc.faqs)]} />
-      <PageHeader
-        crumbs={[
-          { name: kind === "services" ? "Services" : "Products", href: `/${kind}` },
-          { name: doc.title, href: path },
-        ]}
-        eyebrow={tagline || (kind === "services" ? "Service" : "Product")}
-        title={doc.title}
-        description={<p className="text-ink/85">{doc.summary || doc.shortDescription}</p>}
-      >
-        {chips.length > 0 && (
-          <ul className="mb-8 flex flex-wrap gap-2">
-            {chips.map((c) => (
-              <li key={c} className="inline-flex items-center gap-1.5 rounded-full border border-primary/30 bg-primary/10 px-3 py-1.5 text-xs font-semibold">
-                <Check className="h-3.5 w-3.5 text-hl" aria-hidden /> {c}
-              </li>
-            ))}
-          </ul>
-        )}
-        <div className="flex flex-col gap-3 sm:flex-row">
-          <DemoButton service={doc.title}>
-            Book a free demo <ArrowRight className="h-4 w-4" aria-hidden />
-          </DemoButton>
-          <a href={whatsappLink(whatsapp, `Hello Zylo Solution, I'd like to know more about ${doc.title}.`)} target="_blank" rel="noopener noreferrer" className="btn-ghost">
-            <WhatsAppIcon className="h-4 w-4 text-whatsapp" /> Ask on WhatsApp
-          </a>
+      {/* Hero: text on the left, picture on the right (under the title on phones) */}
+      <section className="relative overflow-hidden pb-12 pt-40 sm:pt-44 lg:pb-16">
+        <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
+          <div className="grid-bg absolute inset-0" />
         </div>
-      </PageHeader>
-
-      {doc.coverImage && (
         <div className="container">
-          <CoverImage
-            src={doc.coverImage}
-            alt={`${doc.title} by Zylo Solution, Bahrain`}
-            sizes="(min-width: 1280px) 1176px, 100vw"
-            priority
-            className="aspect-[16/9] rounded-[28px] border border-line"
-          />
+          <div data-hero-item style={hi(1)}>
+            <Breadcrumbs
+              items={[
+                { name: kind === "services" ? "Services" : "Products", href: `/${kind}` },
+                { name: doc.title, href: path },
+              ]}
+            />
+          </div>
+          <div className={cn("mt-10 grid items-center gap-10", doc.coverImage && "lg:grid-cols-[1fr_1.05fr] lg:gap-14")}>
+            <div className="lg:col-start-1 lg:row-start-1">
+              {tagline && (
+                <p data-hero-item style={hi(2)} className="eyebrow">
+                  {tagline}
+                </p>
+              )}
+              <h1 data-hero-item="lcp" style={hi(3)} className={cn("text-4xl font-bold leading-[1.08] sm:text-5xl", tagline && "mt-5")}>
+                {doc.title}
+              </h1>
+            </div>
+
+            {doc.coverImage && (
+              <div data-hero-item style={hi(3)} className="lg:col-start-2 lg:row-span-2 lg:row-start-1">
+                <CoverImage
+                  src={doc.coverImage}
+                  alt={`${doc.title} by Zylo Solution, Bahrain`}
+                  sizes="(min-width: 1024px) 600px, 100vw"
+                  priority
+                  className="aspect-[16/10] rounded-3xl border border-line"
+                />
+              </div>
+            )}
+
+            <div data-hero-item style={hi(4)} className="lg:col-start-1 lg:row-start-2 lg:self-start">
+              {(doc.summary || doc.shortDescription) && (
+                <p className="max-w-xl text-base leading-relaxed text-ink/80 sm:text-lg">{doc.summary || doc.shortDescription}</p>
+              )}
+              {chips.length > 0 && (
+                <ul className="mt-6 flex flex-wrap gap-2">
+                  {chips.map((c) => (
+                    <li key={c} className="inline-flex items-center gap-1.5 rounded-full border border-primary/30 bg-primary/10 px-3 py-1.5 text-xs font-semibold">
+                      <Check className="h-3.5 w-3.5 text-hl" aria-hidden /> {c}
+                    </li>
+                  ))}
+                </ul>
+              )}
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                <DemoButton service={doc.title}>
+                  Book a free demo <ArrowRight className="h-4 w-4" aria-hidden />
+                </DemoButton>
+                <a href={whatsappLink(whatsapp, `Hello Zylo Solution, I'd like to know more about ${doc.title}.`)} target="_blank" rel="noopener noreferrer" className="btn-ghost">
+                  <WhatsAppIcon className="h-4 w-4 text-whatsapp" /> Ask on WhatsApp
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
-      )}
+      </section>
 
       <div className="container grid gap-12 py-16 lg:grid-cols-[1fr_360px] lg:gap-14 lg:py-20">
         <div className="min-w-0">

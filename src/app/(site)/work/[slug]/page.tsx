@@ -64,6 +64,7 @@ export default async function ProjectPage({ params }: Props) {
         eyebrow={p.sample ? "Sample case study" : "Case study"}
         title={p.title}
         description={<p>{p.description}</p>}
+        image={{ src: p.coverImage, alt: `${p.title} – ${p.industry}, ${p.country}` }}
       />
 
       <div className="container">
@@ -77,15 +78,6 @@ export default async function ProjectPage({ params }: Props) {
             </div>
           ))}
         </dl>
-        {p.coverImage && (
-          <CoverImage
-            src={p.coverImage}
-            alt={`${p.title} – ${p.industry}, ${p.country}`}
-            sizes="(min-width: 1280px) 1176px, 100vw"
-            priority
-            className="mt-8 aspect-[16/9] rounded-[28px] border border-line"
-          />
-        )}
       </div>
 
       <div className="container grid gap-12 py-16 lg:grid-cols-[1fr_340px] lg:py-20">

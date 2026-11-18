@@ -2,7 +2,6 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { Clock } from "lucide-react";
 import { PageHeader } from "@/components/layout/PageHeader";
-import { CoverImage } from "@/components/ui/CoverImage";
 import { Markdown } from "@/components/ui/Markdown";
 import { FaqAccordion } from "@/components/ui/FaqAccordion";
 import { PostCard } from "@/components/cards/PostCard";
@@ -52,6 +51,7 @@ export default async function PostPage({ params }: Props) {
         ]}
         eyebrow={post.tags[0]}
         title={post.title}
+        image={{ src: post.coverImage, alt: post.title }}
         description={
           <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm">
             <span>By {post.author}</span>
@@ -66,9 +66,6 @@ export default async function PostPage({ params }: Props) {
       />
 
       <article className="container max-w-3xl pb-16">
-        {post.coverImage && (
-          <CoverImage src={post.coverImage} alt={post.title} sizes="(min-width: 768px) 768px, 100vw" priority className="mb-12 aspect-[16/9] rounded-[24px] border border-line" />
-        )}
         <p className="mb-10 border-l-2 border-primary pl-5 text-lg leading-relaxed text-ink/90">{post.excerpt}</p>
         <Markdown>{post.content}</Markdown>
 
