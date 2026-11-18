@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
-import { motion, useMotionValueEvent, useScroll, useTransform } from "framer-motion";
+import { motion, useMotionValueEvent, useScroll, useSpring, useTransform, type MotionValue } from "framer-motion";
 import { ArrowRight, MoveRight } from "lucide-react";
 import { ServiceCard } from "@/components/cards/ServiceCard";
 import { DemoButton } from "@/components/booking/DemoButton";
@@ -75,8 +75,10 @@ export function HorizontalServices({ services }: { services: ServiceDoc[] }) {
   }, [mode, distance]);
 
   const { scrollYProgress } = useScroll({ target: section, offset: ["start start", "end end"] });
-  const x = useTransform(scrollYProgress, [0, 1], [0, -distance]);
-  const progress = useTransform(scrollYProgress, [0, 1], [0.04, 1]);
+  // A soft spring between the scroll position and the cards: they ease in and settle instead of moving rigidly.
+  const smooth = useSpring(scrollYProgress, { stiffness: 90, damping: 24, mass: 0.6, restDelta: 0.0005 });
+  const x = useTransform(smooth, [0, 1], [0, -distance]);
+  const progress = useTransform(smooth, [0, 1], [0.04, 1]);
 
   const toIndex = (v: number) => Math.min(services.length, Math.max(1, Math.round(v * (services.length - 1)) + 1));
 
@@ -156,7 +158,7 @@ export function HorizontalServices({ services }: { services: ServiceDoc[] }) {
               className="flex w-max items-stretch gap-5 px-4 will-change-transform sm:gap-6 sm:px-6 lg:px-[max(2rem,calc((100vw-1176px)/2))]"
             >
               {services.map((s) => (
-                <div key={s.slug} className={cn(cardW, "shrink-0 snap-start")}>
+                <Slide key={s.slug} x={x} active={pinned} className={cn(cardW, "shrink-0 snap-start")}>
                   <ServiceCard
                     href={`/services/${s.slug}`}
                     icon={s.icon}
@@ -165,20 +167,72 @@ export function HorizontalServices({ services }: { services: ServiceDoc[] }) {
                     image={s.coverImage}
                     compact={compact}
                   />
-                </div>
+                </Slide>
               ))}
-              <div className={cn(cardW, "flex shrink-0 snap-start flex-col justify-center rounded-3xl bg-black p-8 text-white")}>
+              <Slide x={x} active={pinned} className={cn(cardW, "flex shrink-0 snap-start flex-col justify-center rounded-3xl bg-black p-8 text-white")}>
                 <span className="h-3 w-3 rounded-full bg-accent" aria-hidden />
                 <h3 className="mt-5 text-2xl font-bold text-white">Not sure where to start?</h3>
                 <p className={cn("mt-3 text-white/70", compact && "hidden")}>Tell us your goal. We&apos;ll recommend the simplest solution, for free.</p>
                 <DemoButton variant="none" className={cn("btn-yellow self-start", compact ? "mt-5" : "mt-7")}>
                   Get a free consultation <ArrowRight className="h-4 w-4" aria-hidden />
                 </DemoButton>
-              </div>
+              </Slide>
             </motion.div>
           </div>
         </div>
       </div>
     </section>
+  );
+}
+
+/**
+ * One card in the pinned track. Near the focus point (a little left of centre) it is full size and fully
+ * visible; towards the edges it shrinks slightly, drops a little, tilts and fades – so cards seem to rise
+ * into place as the row slides. Geometry is measured on resize, not every frame.
+ */
+function Slide({
+  x,
+  active,
+  className,
+  children,
+}: {
+  x: MotionValue<number>;
+  active: boolean;
+  className?: string;
+  children: React.ReactNode;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const geo = useRef({ left: 0, width: 1, vw: 1 });
+
+  useEffect(() => {
+    const measure = () => {
+      if (!ref.current) return;
+      geo.current = { left: ref.current.offsetLeft, width: ref.current.offsetWidth, vw: window.innerWidth };
+    };
+    measure();
+    const ro = new ResizeObserver(measure);
+    if (ref.current) ro.observe(ref.current);
+    window.addEventListener("resize", measure);
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("resize", measure);
+    };
+  }, []);
+
+  // signed distance from the focus point, roughly −1 (far left) … 1 (far right)
+  const dist = useTransform(x, (xv) => {
+    const { left, width, vw } = geo.current;
+    const center = left + xv + width / 2;
+    return Math.max(-1, Math.min(1, (center - vw * 0.42) / (vw * 0.62)));
+  });
+  const scale = useTransform(dist, (d) => 1 - 0.07 * Math.abs(d));
+  const y = useTransform(dist, (d) => 26 * Math.abs(d) ** 1.4);
+  const rotate = useTransform(dist, (d) => d * 0.8);
+  const opacity = useTransform(dist, (d) => 1 - 0.25 * Math.max(0, Math.abs(d) - 0.35) / 0.65);
+
+  return (
+    <motion.div ref={ref} className={className} style={active ? { scale, y, rotate, opacity } : undefined}>
+      {children}
+    </motion.div>
   );
 }

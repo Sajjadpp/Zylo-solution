@@ -37,7 +37,7 @@ function LoginForm() {
   return (
     <form onSubmit={submit} className="w-full max-w-sm rounded-3xl border border-line bg-surface/80 p-7 shadow-glow sm:p-8">
       <div className="mb-8 flex flex-col items-center text-center">
-        <div className="text-[30px]">
+        <div className="text-[40px]">
           <Wordmark />
         </div>
         <h1 className="mt-6 flex items-center gap-2 text-lg font-semibold">

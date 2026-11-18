@@ -4,8 +4,8 @@ import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { CoverImage } from "@/components/ui/CoverImage";
 import { Markdown } from "@/components/ui/Markdown";
 import { FaqAccordion } from "@/components/ui/FaqAccordion";
-import { Reveal } from "@/components/ui/Reveal";
 import { MinimalCta } from "@/components/ui/MinimalCta";
+import { Block } from "@/components/ui/Block";
 import { DemoButton } from "@/components/booking/DemoButton";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { faqLd, serviceLd } from "@/lib/seo";
@@ -33,7 +33,7 @@ export function ProductDetail({
       <JsonLd data={[serviceLd(product, path), faqLd(product.faqs)]} />
 
       {/* ── Hero: title + tagline, picture, summary + one action ─────────── */}
-      <section className="pb-16 pt-40 sm:pt-44 lg:pb-24">
+      <section className="pb-16 pt-32 sm:pt-44 lg:pb-24">
         <div className="container">
           <div data-hero-item style={i(1)}>
             <Breadcrumbs items={[{ name: "Products", href: "/products" }, { name: product.title, href: path }]} />
@@ -190,17 +190,5 @@ export function ProductDetail({
 
       <MinimalCta title={`Ready to see ${product.title}?`} text="A free 30-minute demo, tailored to your business." service={product.title} whatsapp={whatsapp} />
     </>
-  );
-}
-
-/** Section with a label column on the left (desktop) and content on the right. */
-function Block({ title, children }: { title: string; children: React.ReactNode }) {
-  return (
-    <section className="border-t border-line">
-      <Reveal className="container grid gap-8 py-14 sm:py-16 lg:grid-cols-[240px_1fr] lg:gap-16">
-        <h2 className="text-lg font-semibold text-muted">{title}</h2>
-        <div className="min-w-0">{children}</div>
-      </Reveal>
-    </section>
   );
 }

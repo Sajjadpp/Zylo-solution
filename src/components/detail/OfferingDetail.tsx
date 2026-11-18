@@ -38,7 +38,7 @@ export function OfferingDetail({
     <>
       <JsonLd data={[serviceLd(doc, path), faqLd(doc.faqs)]} />
       {/* Hero: text on the left, picture on the right (under the title on phones) */}
-      <section className="relative overflow-hidden pb-12 pt-40 sm:pt-44 lg:pb-16">
+      <section className="relative overflow-hidden pb-12 pt-32 sm:pt-44 lg:pb-16">
         <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
           <div className="grid-bg absolute inset-0" />
         </div>

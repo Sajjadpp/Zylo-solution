@@ -30,7 +30,7 @@ export function Footer({ services, settings }: { services: ServiceDoc[]; setting
     <footer className="theme-dark relative bg-bg" data-spy="contact">
       <div className="container grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1.2fr_1.3fr]">
         <div>
-          <Link href="/" aria-label="Zylo Solution home" className="inline-block text-[28px]">
+          <Link href="/" aria-label="Zylo Solution home" className="inline-block text-[38px]">
             <Wordmark />
           </Link>
           <p className="mt-5 max-w-xs text-sm leading-relaxed text-muted">

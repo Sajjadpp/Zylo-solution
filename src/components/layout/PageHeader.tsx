@@ -26,7 +26,7 @@ export function PageHeader({
   const withImage = Boolean(image?.src);
 
   return (
-    <section className="relative overflow-hidden pb-12 pt-40 sm:pt-44 lg:pb-16">
+    <section className="relative overflow-hidden pb-12 pt-32 sm:pt-44 lg:pb-16">
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
         <div className="grid-bg absolute inset-0" />
         <div className="absolute -top-48 left-1/2 h-[460px] w-[820px] -translate-x-1/2 rounded-full bg-primary/[0.08] blur-[130px]" />

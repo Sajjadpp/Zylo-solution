@@ -21,7 +21,10 @@ export function SmoothScroll() {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const lenis = new Lenis({
       autoRaf: true,
-      lerp: 0.1,
+      // Lower lerp = longer, softer glide. 0.07 feels calm without feeling laggy.
+      lerp: 0.07,
+      // Each wheel notch moves the page a little less than the browser default.
+      wheelMultiplier: 0.85,
       smoothWheel: true,
       anchors: { offset: -100 },
       // let scrollable inner areas (modal, menus) scroll natively

@@ -42,7 +42,7 @@ function Sidebar({ onNavigate }: { onNavigate?: () => void }) {
   }
   return (
     <div className="flex h-full flex-col">
-      <Link href="/admin" onClick={onNavigate} className="px-6 pb-8 pt-7 text-[22px]" aria-label="Admin home">
+      <Link href="/admin" onClick={onNavigate} className="px-6 pb-8 pt-7 text-[30px]" aria-label="Admin home">
         <Wordmark />
       </Link>
       <nav aria-label="Admin" className="flex-1 space-y-1 px-3">

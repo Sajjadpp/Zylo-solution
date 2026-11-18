@@ -8,7 +8,7 @@ const i = (n: number) => ({ "--i": n }) as React.CSSProperties;
 
 export function Hero({ whatsapp }: { whatsapp: string }) {
   return (
-    <section id="home" data-spy="home" className="relative overflow-hidden pb-16 pt-40 sm:pt-44 lg:pb-24 lg:pt-48">
+    <section id="home" data-spy="home" className="relative overflow-hidden pb-16 pt-32 sm:pt-44 lg:pb-24 lg:pt-48">
       {/* background */}
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
         <div className="grid-bg absolute inset-0" />

@@ -1,10 +1,11 @@
 import Link from "next/link";
-import { ArrowRight, ArrowUpRight, Check } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Counter } from "@/components/ui/Counter";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Icon } from "@/components/ui/Icon";
 import { ServiceCard } from "@/components/cards/ServiceCard";
+import { ProductRow } from "@/components/products/ProductRow";
 import { ProjectCard } from "@/components/cards/ProjectCard";
 import { DemoButton } from "@/components/booking/DemoButton";
 import { WhatsAppIcon } from "@/components/ui/SocialIcons";
@@ -88,40 +89,15 @@ export function FeaturedProducts({ products }: { products: ProductDoc[] }) {
           title="Ready-made tools for stock and field sales"
           description="Built by Zylo, connected to Odoo, and running at businesses across the GCC."
         />
-        <div className="mt-14 grid gap-6 lg:grid-cols-2">
+        <div className="mt-14 grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
           {products.map((p, i) => (
-            <Reveal key={p.slug} delay={i * 0.08} className="h-full">
-              <article className="group relative flex h-full flex-col overflow-hidden rounded-[32px] border border-line bg-gradient-to-b from-card to-surface p-7 transition duration-300 hover:-translate-y-1 hover:border-primary/40 sm:p-9">
-                <div aria-hidden className="absolute -right-16 -top-16 h-56 w-56 rounded-full bg-primary/20 blur-3xl transition group-hover:bg-primary/30" />
-                <div className="relative flex items-start justify-between gap-4">
-                  <span className="grid h-14 w-14 place-items-center rounded-2xl bg-primary text-white shadow-[0_12px_30px_-10px_rgba(37,65,245,0.9)]">
-                    <Icon name={p.icon} className="h-7 w-7" />
-                  </span>
-                  <span className="rounded-full border border-line px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-muted">
-                    Zylo product
-                  </span>
-                </div>
-                <p className="relative mt-8 text-sm font-medium text-hl">{p.tagline}</p>
-                <h3 className="relative mt-2 text-2xl font-bold sm:text-3xl">{p.title}</h3>
-                <p className="relative mt-3 flex-1 leading-relaxed text-muted">{p.shortDescription}</p>
-                <ul className="relative mt-6 flex flex-wrap gap-2">
-                  {p.chips.map((c) => (
-                    <li key={c} className="inline-flex items-center gap-1.5 rounded-full border border-primary/30 bg-primary/10 px-3 py-1.5 text-xs font-semibold text-ink">
-                      <Check className="h-3.5 w-3.5 text-hl" aria-hidden /> {c}
-                    </li>
-                  ))}
-                </ul>
-                <div className="relative mt-8 flex flex-wrap gap-3">
-                  <Link href={`/products/${p.slug}`} className="btn-ghost">
-                    Explore {p.title} <ArrowUpRight className="h-4 w-4" aria-hidden />
-                  </Link>
-                  <DemoButton service={p.title} variant="none" className="btn px-3 text-hl hover:text-ink">
-                    Book a demo
-                  </DemoButton>
-                </div>
-              </article>
-            </Reveal>
+            <ProductRow key={p.slug} product={p} index={i} headingAs="h3" />
           ))}
+        </div>
+        <div className="mt-12 text-center">
+          <Link href="/products" className="btn-ghost">
+            View all products <ArrowRight className="h-4 w-4" aria-hidden />
+          </Link>
         </div>
       </div>
     </section>

@@ -5,7 +5,16 @@ import { Reveal } from "@/components/ui/Reveal";
 import type { ProductDoc } from "@/types";
 
 /** One product on /products: a compact card – picture, name, tagline, short text, 3 features, one link. */
-export function ProductRow({ product, index }: { product: ProductDoc; index: number }) {
+export function ProductRow({
+  product,
+  index,
+  headingAs: Heading = "h2",
+}: {
+  product: ProductDoc;
+  index: number;
+  /** h2 on /products, h3 when the cards sit inside another section (home page). */
+  headingAs?: "h2" | "h3";
+}) {
   const href = `/products/${product.slug}`;
   const features = (product.chips.length ? product.chips : product.features).slice(0, 3);
 
@@ -22,12 +31,12 @@ export function ProductRow({ product, index }: { product: ProductDoc; index: num
           />
         </div>
         <div className="flex flex-1 flex-col pt-5">
-          <h2 className="text-xl font-bold sm:text-2xl">
+          <Heading className="text-xl font-bold sm:text-2xl">
             {/* stretched link: the whole card is clickable */}
             <Link href={href} className="after:absolute after:inset-0 group-hover:text-primary">
               {product.title}
             </Link>
-          </h2>
+          </Heading>
           {product.tagline && <p className="mt-1 text-muted">{product.tagline}</p>}
           {product.shortDescription && <p className="mt-3 text-sm leading-relaxed text-ink/75">{product.shortDescription}</p>}
           {features.length > 0 && (
